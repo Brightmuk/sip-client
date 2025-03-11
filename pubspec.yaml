@@ -28,6 +28,7 @@ dependencies:
   flutter_webrtc: ^0.12.6
   provider: 6.1.2
   logger: ^2.5.0
+  modal_bottom_sheet: ^3.0.0
 
 dev_dependencies:
   flutter_test:

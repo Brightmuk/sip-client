@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:logger/logger.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -194,35 +195,31 @@ class _MyDialPadWidget extends State<DialPadWidget>
         Theme.of(context).buttonTheme.colorScheme?.surfaceContainerLowest;
     return 
     Container(
-      color: ,
+      height: MediaQuery.of(context).size.height*0.7,
+      color: Color.fromRGBO(248, 251, 240, 1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+             
         children: [
-        Align(
-          alignment: AlignmentDirectional.centerStart,
-          child: Text('Destination URL'),
-        ),
-        const SizedBox(height: 8),
         TextField(
           keyboardType: TextInputType.text,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18, color: textFieldColor),
-          maxLines: 2,
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+          
           decoration: InputDecoration(
             filled: true,
-            fillColor: textFieldFill,
+            fillColor: Color.fromRGBO(248, 251, 240, 1),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue.withValues(alpha: 0.5)),
-              borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide(color: Colors.transparent),
+             
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue.withValues(alpha: 0.5)),
-              borderRadius: BorderRadius.circular(5),
+             borderSide: BorderSide(color: Colors.transparent),
+             
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue.withValues(alpha: 0.5)),
-              borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide(color: Colors.transparent),
+             
             ),
           ),
           controller: _textController,
@@ -240,7 +237,7 @@ class _MyDialPadWidget extends State<DialPadWidget>
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               GestureDetector(
-                onTap: () => _handleCall(context),
+                onTap: () => Navigator.pop(context),
                 child: Container(
                   width: 65,
                   height: 65,
@@ -308,7 +305,7 @@ class _MyDialPadWidget extends State<DialPadWidget>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dart SIP UA Demo"),
+        title: Text("NENACALL: [Register Status: ${helper!.registerState.state?.name ?? ''} $receivedMsg]",style: TextStyle(fontSize: 14),),
         actions: <Widget>[
           PopupMenuButton<String>(
               onSelected: (String value) {
@@ -380,27 +377,41 @@ class _MyDialPadWidget extends State<DialPadWidget>
                   ]),
         ],
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        children: <Widget>[
-          SizedBox(height: 8),
-          Center(
-            child: Text(
-              'Register Status: ${helper!.registerState.state?.name ?? ''}',
-              style: TextStyle(fontSize: 18, color: textColor),
-            ),
-          ),
-          SizedBox(height: 8),
-          Center(
-            child: Text(
-              'Received Message: $receivedMsg',
-              style: TextStyle(fontSize: 16, color: textColor),
-            ),
-          ),
-          SizedBox(height: 8),
-           _buildDialPad()
-        ],
-      ),
+      body:  ListView.builder(
+            itemCount: 3,
+            itemBuilder: (context, index){
+            return ListTile(
+              title: Text('+254 7123456789',style: TextStyle(fontSize: 14),),
+              subtitle: Text('Outgoing call, 1 m 12 secs',style: TextStyle(fontSize: 12,color: Colors.grey),),
+              trailing: Text('12:30 PM',style: TextStyle(fontSize: 14),),
+            );
+          }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+     floatingActionButton: GestureDetector(
+                  onTap: (){
+                    showMaterialModalBottomSheet(
+                      elevation: 0,
+                      
+                        barrierColor: Colors.transparent,
+                        context: context,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        builder: (context) => _buildDialPad(),
+                      );
+                  },
+                  child: Container(
+                    width: 65,
+                    height: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(65),
+                        border: Border.all(
+                            color: Color.fromRGBO(115, 121, 110, 1), width: 1)),
+                    child: Center(
+                        child: Icon(
+                      Icons.dialpad,
+                      size: 25,
+                    )),
+                  ),
+                ),
     );
   }
 
