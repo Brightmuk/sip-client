@@ -1,0 +1,2 @@
+/Users/brightmukonesi/Desktop/sip-client/android/app/.cxx/Debug/w554r2a5/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/brightmukonesi/Desktop/sip-client/android/app/.cxx/Debug/w554r2a5/arm64-v8a/CMakeFiles/rebuild_cache.dir

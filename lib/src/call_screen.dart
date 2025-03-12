@@ -3,6 +3,10 @@ import 'package:dart_sip_ua_example/src/widgets/action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:sip_ua/sip_ua.dart';
 
+//UI CHNAGES 
+//This is a copy of the call screen created just to change ui 
+//without touching the call functionality as i am testing
+
 class CallScreen2 extends StatefulWidget {
   const CallScreen2({Key? key}) : super(key: key);
 

@@ -444,6 +444,12 @@ class _MyCallScreenWidget extends State<CallScreenWidget>
             checked: _audioMuted,
             onPressed: () => _muteAudio(),
           ));
+          basicActions.add(ActionButton(
+            title: _hold ? 'unhold' : 'hold',
+            icon: _hold ? Icons.play_arrow : Icons.pause,
+            checked: _hold,
+            onPressed: () => _handleHold(),
+          ));
 
           if (voiceOnly) {
             advanceActions.add(ActionButton(
@@ -466,11 +472,7 @@ class _MyCallScreenWidget extends State<CallScreenWidget>
               checked: _speakerOn,
               onPressed: () => _toggleSpeaker(),
             ));
-            advanceActions2.add(ActionButton(
-              title: 'request video',
-              icon: Icons.videocam,
-              onPressed: () => _handleVideoUpgrade(),
-            ));
+
           } else {
             advanceActions.add(ActionButton(
               title: _videoMuted ? "camera on" : 'camera off',
@@ -479,13 +481,6 @@ class _MyCallScreenWidget extends State<CallScreenWidget>
               onPressed: () => _muteVideo(),
             ));
           }
-
-          basicActions.add(ActionButton(
-            title: _hold ? 'unhold' : 'hold',
-            icon: _hold ? Icons.play_arrow : Icons.pause,
-            checked: _hold,
-            onPressed: () => _handleHold(),
-          ));
 
           basicActions.add(hangupBtn);
 
