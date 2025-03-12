@@ -260,6 +260,7 @@ class _MyDialPadWidget extends State<DialPadWidget>
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(65),
+                    boxShadow: [BoxShadow(color: Colors.grey,spreadRadius: 1,blurRadius: 5)]
                   ),
                   child: Center(
                       child: Icon(
@@ -304,6 +305,7 @@ class _MyDialPadWidget extends State<DialPadWidget>
     currentUserCubit = context.watch<SipUserCubit>();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("NENACALL: [Register Status: ${helper!.registerState.state?.name ?? ''} $receivedMsg]",style: TextStyle(fontSize: 14),),
         actions: <Widget>[

@@ -13,7 +13,7 @@ class ThemeProvider extends ChangeNotifier {
 
   setLightMode() {
     currentTheme = ThemeData(
-      primarySwatch: Colors.blue,
+      primarySwatch: Colors.green,
       fontFamily: 'Roboto',
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: TextStyle(color: Colors.grey),

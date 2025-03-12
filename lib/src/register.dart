@@ -70,9 +70,9 @@ class _MyRegisterWidget extends State<RegisterWidget>
     setState(() {
       _portController.text = '5060';
       _wsUriController.text =
-          _preferences.getString('ws_uri') ?? 'wss://tryit.jssip.net:10443';
+          _preferences.getString('ws_uri') ??'';
       _sipUriController.text =
-          _preferences.getString('sip_uri') ?? 'sip:bright@tryit.jssip.net';
+          _preferences.getString('sip_uri')??'';
       _displayNameController.text =
           _preferences.getString('display_name') ?? 'Flutter SIP UA';
       _passwordController.text = _preferences.getString('password') ?? '';

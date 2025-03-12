@@ -1,3 +1,4 @@
+import 'package:dart_sip_ua_example/src/call_screen.dart';
 import 'package:dart_sip_ua_example/src/theme_provider.dart';
 import 'package:dart_sip_ua_example/src/user_state/sip_user_cubit.dart';
 import 'package:flutter/foundation.dart'
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
     '/callscreen': ([SIPUAHelper? helper, Object? arguments]) =>
         CallScreenWidget(helper, arguments as Call?),
     '/about': ([SIPUAHelper? helper, Object? arguments]) => AboutWidget(),
+     '/call': ([SIPUAHelper? helper, Object? arguments]) => CallScreen2(),
   };
 
   Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
@@ -70,7 +72,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: Provider.of<ThemeProvider>(context).currentTheme,
-        initialRoute: '/',
+        initialRoute: '/call',
         onGenerateRoute: _onGenerateRoute,
       ),
     );
