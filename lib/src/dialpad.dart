@@ -1,5 +1,6 @@
 import 'package:dart_sip_ua_example/src/theme_provider.dart';
 import 'package:dart_sip_ua_example/src/user_state/sip_user_cubit.dart';
+import 'package:dart_sip_ua_example/src/widgets/registration_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
@@ -43,7 +44,7 @@ class _MyDialPadWidget extends State<DialPadWidget>
 
   void _loadSettings() async {
     _preferences = await SharedPreferences.getInstance();
-    _dest = _preferences.getString('dest') ?? 'sip:hello_jssip@tryit.jssip.net';
+    _dest = _preferences.getString('dest') ?? '';
     _textController = TextEditingController(text: _dest);
     _textController!.text = _dest!;
 
@@ -303,81 +304,23 @@ class _MyDialPadWidget extends State<DialPadWidget>
     Color? iconColor = Theme.of(context).iconTheme.color;
     bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     currentUserCubit = context.watch<SipUserCubit>();
-
+    //  ${helper!.registerState.state?.name ?? ''} $receivedMsg
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("NENACALL: [Register Status: ${helper!.registerState.state?.name ?? ''} $receivedMsg]",style: TextStyle(fontSize: 14),),
+        title: SizedBox(
+          width: 100,
+          child: Row(
+            children: [
+              Text("NENACALL" ,style: TextStyle(fontSize: 14),),
+              SizedBox(width: 10,),
+              RegistrationIndicator(state: helper!.registerState.state?.name??'NONE',)
+            ],
+          ),
+        ),
         actions: <Widget>[
-          PopupMenuButton<String>(
-              onSelected: (String value) {
-                switch (value) {
-                  case 'account':
-                    Navigator.pushNamed(context, '/register');
-                    break;
-                  case 'about':
-                    Navigator.pushNamed(context, '/about');
-                    break;
-                  case 'theme':
-                    final themeProvider = Provider.of<ThemeProvider>(context,
-                        listen:
-                            false); // get the provider, listen false is necessary cause is in a function
-
-                    setState(() {
-                      isDarkTheme = !isDarkTheme;
-                    }); // change the variable
-
-                    isDarkTheme // call the functions
-                        ? themeProvider.setDarkmode()
-                        : themeProvider.setLightMode();
-                    break;
-                  default:
-                    break;
-                }
-              },
-              icon: Icon(Icons.menu),
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                    PopupMenuItem(
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.account_circle,
-                            color: iconColor,
-                          ),
-                          SizedBox(width: 12),
-                          Text('Account'),
-                        ],
-                      ),
-                      value: 'account',
-                    ),
-                    PopupMenuItem(
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.info,
-                            color: iconColor,
-                          ),
-                          SizedBox(width: 12),
-                          Text('About'),
-                        ],
-                      ),
-                      value: 'about',
-                    ),
-                    PopupMenuItem(
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.info,
-                            color: iconColor,
-                          ),
-                          SizedBox(width: 12),
-                          Text(isDarkTheme ? 'Light Mode' : 'Dark Mode'),
-                        ],
-                      ),
-                      value: 'theme',
-                    )
-                  ]),
-        ],
+          IconButton(onPressed: ()=>Navigator.pushNamed(context, '/register'), icon: Icon(Icons.person_2_outlined))
+        ]
       ),
       body:  ListView.builder(
             itemCount: 3,

@@ -68,7 +68,7 @@ class _MyRegisterWidget extends State<RegisterWidget>
   void _loadSettings() async {
     _preferences = await SharedPreferences.getInstance();
     setState(() {
-      _portController.text = '5060';
+      _portController.text = _preferences.getString('port')??'';
       _wsUriController.text =
           _preferences.getString('ws_uri') ??'';
       _sipUriController.text =

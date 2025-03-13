@@ -650,7 +650,7 @@ class _MyCallScreenWidget extends State<CallScreenWidget>
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('[$direction] ${_state.name}'),
+        title: Text('Calling'),
       ),
       body: _buildContent(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
